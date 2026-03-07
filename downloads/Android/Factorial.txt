@@ -1,0 +1,54 @@
+activity_main.xml
+-------------------
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical" android:padding="20dp" android:gravity="center">
+
+    <EditText android:id="@+id/editTextText" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="Enter the number" android:inputType="number" android:gravity="center" />
+    <Button android:id="@+id/button" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Find Factorial" android:layout_marginTop="20dp" android:layout_marginBottom="20dp" />
+    <TextView android:id="@+id/textView" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Result" android:textSize="20sp" />
+</LinearLayout>
+
+-----------------------------------------------------------------
+-----------------------------------------------------------------
+
+
+MainActivity.java
+-------------------
+
+import android.os.Bundle;
+import android.widget.*;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+    Button button; TextView textView; EditText editText;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        editText = findViewById(R.id.editTextText);
+        button = findViewById(R.id.button);
+        textView = findViewById(R.id.textView);
+
+        button.setOnClickListener(view -> {
+            try {
+                int num = Integer.parseInt(editText.getText().toString());
+                long result = factorial(num);
+                textView.setText("Factorial: " + result);
+            } catch (NumberFormatException e) {
+                textView.setText("Please enter a number");
+            }
+        });
+    }
+
+    private long factorial(int num) {
+        long fact = 1;
+        for (int i = 1; i <= num; i++) {
+            fact *= i;
+        }
+        return fact;
+    }
+}

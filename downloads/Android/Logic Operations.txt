@@ -1,0 +1,50 @@
+activity_main.xml
+-------------------
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical" android:padding="20dp" android:gravity="center">
+
+    <EditText android:id="@+id/ed1" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="Enter marks (0-100)" android:inputType="number" android:gravity="center" />
+    <Button android:id="@+id/b1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Find Grade" android:layout_marginTop="20dp" android:layout_marginBottom="20dp" />
+    <TextView android:id="@+id/t1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="24sp" />
+</LinearLayout>
+
+-----------------------------------------------------------------
+-----------------------------------------------------------------
+
+
+MainActivity.java
+-------------------
+
+import android.os.Bundle;
+import android.widget.*;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+    TextView t1; EditText ed; Button btn;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        t1 = findViewById(R.id.t1);
+        ed = findViewById(R.id.ed1);
+        btn = findViewById(R.id.b1);
+
+        btn.setOnClickListener(view -> {
+            try {
+                int mark = Integer.parseInt(ed.getText().toString());
+                if (mark >= 90 && mark <= 100) { t1.setText("Your Grade is A+"); } 
+                else if (mark >= 80 && mark <= 89) { t1.setText("Your Grade is A"); } 
+                else if (mark >= 70 && mark <= 79) { t1.setText("Your Grade is B"); } 
+                else if (mark >= 60 && mark <= 69) { t1.setText("Your Grade is C"); } 
+                else if (mark >= 50 && mark <= 59) { t1.setText("Your Grade is D"); } 
+                else { t1.setText("Your Grade is F"); }
+            } catch (NumberFormatException e) {
+                t1.setText("Please enter valid marks");
+            }
+        });
+    }
+}

@@ -1,0 +1,48 @@
+activity_main.xml
+-------------------
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical" android:gravity="center" android:padding="20dp">
+
+    <Button android:id="@+id/Yellow" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Yellow" />
+    <Button android:id="@+id/Blue" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Blue" />
+    <Button android:id="@+id/Green" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Green" />
+    <Button android:id="@+id/Red" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Red" />
+</LinearLayout>
+
+-----------------------------------------------------------------
+-----------------------------------------------------------------
+
+
+MainActivity.java
+-------------------
+
+import android.graphics.Color;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+    Button Yellow, Red, Green, Blue;
+    View viewx;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        Yellow = findViewById(R.id.Yellow);
+        Blue = findViewById(R.id.Blue);
+        Green = findViewById(R.id.Green);
+        Red = findViewById(R.id.Red);
+        viewx = getWindow().getDecorView();
+
+        Yellow.setOnClickListener(v -> viewx.setBackgroundColor(Color.parseColor("#FFEB3B")));
+        Blue.setOnClickListener(v -> viewx.setBackgroundColor(Color.parseColor("#2196F3")));
+        Green.setOnClickListener(v -> viewx.setBackgroundColor(Color.parseColor("#4CAF50")));
+        Red.setOnClickListener(v -> viewx.setBackgroundColor(Color.parseColor("#DB0909")));
+    }
+}

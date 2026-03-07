@@ -1,0 +1,5 @@
+read -p "Enter Basic Salary: " basic
+da=$((basic * 40 / 100))
+hra=$((basic * 20 / 100))
+gross=$((basic + da + hra))
+echo "Gross Salary = $gross"

@@ -1,0 +1,70 @@
+AndroidManifest.xml
+-------------------
+
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+
+    <application
+        android:allowBackup="true"
+        android:label="IPAddressApp"
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <activity android:name=".MainActivity" android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>
+
+-----------------------------------------------------------------
+-----------------------------------------------------------------
+
+
+activity_main.xml
+-------------------
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical" android:gravity="center">
+
+    <TextView android:id="@+id/t1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Your IP Address" android:textSize="24sp" />
+    <TextView android:id="@+id/t2" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="IP will appear here" android:textSize="16sp" android:layout_marginTop="20dp" />
+</LinearLayout>
+
+-----------------------------------------------------------------
+-----------------------------------------------------------------
+
+
+MainActivity.java
+-------------------
+
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
+import android.os.Bundle;
+import android.text.format.Formatter;
+import android.widget.TextView;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+    TextView t2; WifiManager wm;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        t2 = findViewById(R.id.t2);
+        wm = (WifiManager) getApplicationContext().getSystemService(WIFI_SERVICE);
+        
+        if (wm != null) {
+            WifiInfo wifiInfo = wm.getConnectionInfo();
+            String ipAddress = Formatter.formatIpAddress(wifiInfo.getIpAddress());
+            t2.setText(ipAddress);
+        } else {
+            t2.setText("WiFi not available");
+        }
+    }
+}

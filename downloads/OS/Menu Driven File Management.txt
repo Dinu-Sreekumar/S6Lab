@@ -1,0 +1,22 @@
+echo "1. Display current directory"
+echo "2. List files"
+echo "3. Make directory"
+echo "4. Copy file"
+echo "5. Rename file"
+echo "6. Delete file"
+read -p "Enter choice: " ch
+case $ch in
+1) pwd ;;
+2) ls ;;
+3) read -p "Enter directory name: " d
+ mkdir "$d" ;;
+4) read -p "Enter source file: " s
+ read -p "Enter destination file: " t
+ cp "$s" "$t" ;;
+5) read -p "Enter old name: " o
+ read -p "Enter new name: " n
+ mv "$o" "$n" ;;
+6) read -p "Enter file name to delete: " f
+ rm "$f" ;;
+*) echo "Invalid choice" ;;
+esac
